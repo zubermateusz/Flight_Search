@@ -4,15 +4,15 @@ public class FlightDatabase {
     ArrayList<Flight> flights = new ArrayList<Flight>();
 
     public FlightDatabase() {
-        this.flights.add(new Flight("Berlin", "Tokyo"));
-        this.flights.add(new Flight("Paris", "Berlin"));
-        this.flights.add(new Flight("Warsaw", "Paris"));
-        this.flights.add(new Flight("Madrid", "Berlin"));
-        this.flights.add(new Flight("Berlin", "Warsaw"));
-        this.flights.add(new Flight("Paris", "Madrid"));
-        this.flights.add(new Flight("Porto", "Warsaw"));
-        this.flights.add(new Flight("Madrid", "Porto"));
-        this.flights.add(new Flight("Warsaw", "Madrid"));
+        this.flights.add(new Flight("Berlin", "Tokyo", 1800));
+        this.flights.add(new Flight("Paris", "Berlin", 79));
+        this.flights.add(new Flight("Warsaw", "Paris", 120));
+        this.flights.add(new Flight("Madrid", "Berlin", 200));
+        this.flights.add(new Flight("Berlin", "Warsaw", 77));
+        this.flights.add(new Flight("Paris", "Madrid", 180));
+        this.flights.add(new Flight("Porto", "Warsaw", 412));
+        this.flights.add(new Flight("Madrid", "Porto", 102));
+        this.flights.add(new Flight("Warsaw", "Madrid", 380));
     }
 
     public void checkIfFlightExists(String start, String end) {
@@ -60,15 +60,25 @@ public class FlightDatabase {
 
     public ArrayList<String> getCities() {
         ArrayList<String> cities = new ArrayList<>();
-        for (int i = 0; i < this.flights.size(); i++) {
-            Flight flight = this.flights.get(i);
+        this.flights.stream().forEach(flight -> {
             if (!cities.contains(flight.departure)) {
                 cities.add(flight.departure);
             }
             if (!cities.contains(flight.arrival)) {
                 cities.add(flight.arrival);
             }
-        }
+        });
         return cities;
     }
+
+    public Flight getCheapestFlight() {
+        Flight cheapestFlight = null;
+        for (Flight flight : this.flights) {
+            if (cheapestFlight == null || flight.price < cheapestFlight.price) {
+                cheapestFlight = flight;
+            }
+        }
+        return cheapestFlight;
+    }
 }
+
