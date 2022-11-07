@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class FlightDatabase {
@@ -79,6 +80,21 @@ public class FlightDatabase {
             }
         }
         return cheapestFlight;
+    }
+
+    public ArrayList<Flight> getFlight(String start, String end) {
+        ArrayList<Flight> starting = getFlightsFromCity(start);
+        ArrayList<Flight> ending = getFlightsToCity(end);
+        ArrayList<Flight> results = new ArrayList<Flight>();
+        for (Flight first : starting) {
+            for (Flight second : ending) {
+                if (first.arrival.equals(second.departure)) {
+                    results.add(first);
+                    results.add(second);
+                }
+            }
+        }
+        return results;
     }
 
     public Flight getCheapestFlightFromCity(String city) {
