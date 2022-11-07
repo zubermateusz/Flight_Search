@@ -26,32 +26,26 @@ public class FlightDatabase {
         }
     }
 
-    public void getFlightsFromCity(String city) {
-        boolean isNotFound = true;
+    public ArrayList<Flight> getFlightsFromCity(String city) {
+        ArrayList<Flight> results = new ArrayList<Flight>();
         for (int i = 0; i < this.flights.size(); i++) {
             Flight flight = this.flights.get(i);
             if (city.equals(flight.departure)) {
-                System.out.println(flight.getDetails());
-                isNotFound = false;
-            }
-            if (isNotFound) {
-                System.out.println("Flight not found");
+                results.add(flight);
             }
         }
+        return results;
     }
 
-    public void getFlightsToCity(String city) {
-        boolean isNotFound = true;
+    public ArrayList<Flight> getFlightsToCity(String city) {
+        ArrayList<Flight> results = new ArrayList<Flight>();
         for (int i = 0; i < this.flights.size(); i++) {
             Flight flight = this.flights.get(i);
             if (city.equals(flight.arrival)) {
-                System.out.println(flight.getDetails());
-                isNotFound = false;
-            }
-            if (isNotFound) {
-                System.out.println("Flight not found");
+                results.add(flight);
             }
         }
+        return results;
     }
 
     public void displayFlights(ArrayList<Flight> results) {
