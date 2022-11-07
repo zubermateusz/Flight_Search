@@ -57,4 +57,18 @@ public class FlightDatabase {
             System.out.println(flight.getDetails());
         }
     }
+
+    public ArrayList<String> getCities() {
+        ArrayList<String> cities = new ArrayList<>();
+        for (int i = 0; i < this.flights.size(); i++) {
+            Flight flight = this.flights.get(i);
+            if (!cities.contains(flight.departure)) {
+                cities.add(flight.departure);
+            }
+            if (!cities.contains(flight.arrival)) {
+                cities.add(flight.arrival);
+            }
+        }
+        return cities;
+    }
 }
