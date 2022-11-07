@@ -80,5 +80,16 @@ public class FlightDatabase {
         }
         return cheapestFlight;
     }
+
+    public Flight getCheapestFlightFromCity(String city) {
+        ArrayList<Flight> fromCity = getFlightsFromCity(city);
+        Flight cheapestFlight = null;
+        for (Flight flight : fromCity) {
+            if( cheapestFlight == null || flight.price < cheapestFlight.price) {
+                cheapestFlight = flight;
+            }
+        }
+        return cheapestFlight;
+    }
 }
 
